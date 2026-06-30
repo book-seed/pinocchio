@@ -294,7 +294,8 @@ namespace pinocchio
     JointIndex joint_id)
   {
     assert(model.check(data) && "data is not consistent with model.");
-    assert(model.check(MimicChecker()) && "Function does not support mimic joints");
+    // comment by huiyang
+    // assert(model.check(MimicChecker()) && "Function does not support mimic joints");  
 
     PINOCCHIO_UNUSED_VARIABLE(model);
 
@@ -407,8 +408,14 @@ namespace pinocchio
       const JointIndex i = jmodel.id();
       const JointIndex parent = model.parents[i];
 
+      // mimic joints are supported by huiyang
+
+      // data.jointTorqueRegressor.block(
+      //   jmodel.idx_v(), 10 * (Eigen::Index(col_idx) - 1), jmodel.nv(), 10) =
+      //   jdata.S().transpose() * data.bodyRegressor;
+
       data.jointTorqueRegressor.block(
-        jmodel.idx_v(), 10 * (Eigen::Index(col_idx) - 1), jmodel.nv(), 10) =
+        jmodel.idx_v(), 10 * (Eigen::Index(col_idx) - 1), jmodel.nvExtended(), 10) +=
         jdata.S().transpose() * data.bodyRegressor;
 
       if (parent > 0)
@@ -432,7 +439,8 @@ namespace pinocchio
     const Eigen::MatrixBase<TangentVectorType2> & a)
   {
     assert(model.check(data) && "data is not consistent with model.");
-    assert(model.check(MimicChecker()) && "Function does not support mimic joints");
+    // comment by huiyang
+    // assert(model.check(MimicChecker()) && "Function does not support mimic joints");
     PINOCCHIO_CHECK_ARGUMENT_SIZE(q.size(), model.nq);
     PINOCCHIO_CHECK_ARGUMENT_SIZE(v.size(), model.nv);
     PINOCCHIO_CHECK_ARGUMENT_SIZE(a.size(), model.nv);

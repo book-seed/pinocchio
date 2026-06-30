@@ -57,6 +57,7 @@ namespace pinocchio
         "\tvelocity: spatial velocity of the rigid body\n"
         "\tacceleration: spatial acceleration of the rigid body\n");
 
+      // support mimic joints by huiyang
       bp::def(
         "jointBodyRegressor", &jointBodyRegressor_proxy, bp::args("model", "data", "joint_id"),
         "Compute the regressor for the dynamic parameters of a rigid body attached to a given "
@@ -66,8 +67,8 @@ namespace pinocchio
         "Parameters:\n"
         "\tmodel: model of the kinematic tree\n"
         "\tdata: data related to the model\n"
-        "\tjoint_id: index of the joint\n",
-        mimic_not_supported_function<>(0));
+        "\tjoint_id: index of the joint\n");
+        // mimic_not_supported_function<>(0));
 
       bp::def(
         "frameBodyRegressor", &frameBodyRegressor_proxy, bp::args("model", "data", "frame_id"),
@@ -81,6 +82,7 @@ namespace pinocchio
         "\tframe_id: index of the frame\n",
         mimic_not_supported_function<>(0));
 
+      // support mimic joints by huiyang
       bp::def(
         "computeJointTorqueRegressor",
         &computeJointTorqueRegressor<
@@ -94,8 +96,8 @@ namespace pinocchio
         "\tdata: data related to the model\n"
         "\tq: the joint configuration vector (size model.nq)\n"
         "\tv: the joint velocity vector (size model.nv)\n"
-        "\ta: the joint acceleration vector (size model.nv)\n",
-        mimic_not_supported_function<bp::return_value_policy<bp::return_by_value>>(0));
+        "\ta: the joint acceleration vector (size model.nv)\n");
+        // mimic_not_supported_function<bp::return_value_policy<bp::return_by_value>>(0));
 
       bp::def(
         "computeKineticEnergyRegressor",
