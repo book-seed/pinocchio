@@ -96,8 +96,8 @@ namespace pinocchio
         "\tdata: data related to the model\n"
         "\tq: the joint configuration vector (size model.nq)\n"
         "\tv: the joint velocity vector (size model.nv)\n"
-        "\ta: the joint acceleration vector (size model.nv)\n");
-        // mimic_not_supported_function<bp::return_value_policy<bp::return_by_value>>(0));
+        "\ta: the joint acceleration vector (size model.nv)\n",
+        bp::return_value_policy<bp::return_by_value>());
 
       bp::def(
         "computeKineticEnergyRegressor",
